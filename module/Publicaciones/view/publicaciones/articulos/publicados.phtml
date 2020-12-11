@@ -1,0 +1,29 @@
+<a class="btn btn-primary btn-lg" style="margin: 15px;float: right;" href="<?= $this->url('logout') ?>" >Cerrar Sesión</a>
+
+<br><br>
+<h1>Listado de Artículos Publicados</h1>
+
+
+<div class="table-responsive">
+	<table style="margin-top: 20px;" class="table table-bordered table-sm">
+	
+		<tbody>
+			<?php foreach ($this->articulos as $articulo) { ?>
+				<tr>
+					<td style="border: 2px solid;">
+						<center>
+							<h1 style="color: blue">Artículo <?= $articulo->getId() ?> </h1>
+						 	<img src="/imagen?id=<?= $articulo->getId() ?>" width="600" height="300" > 
+						 	<h3>Publicado por: <b><?= $articulo->getEmail(); ?></b> </h3>
+						 	<h3>Fecha de publicación: <b><?= $articulo->getFechaAlta(); ?></b> </h3>
+						 	<a class="btn btn-success btn-lg" style="margin: 15px;" href="<?= $this->url('readarticulo') ?>?id=<?= $articulo->getId() ?>" >Leer Artículo</a>
+
+					 	</center>
+					</td>
+				</tr>
+
+			<?php } ?>
+		</tbody>
+		
+	</table>
+</div>

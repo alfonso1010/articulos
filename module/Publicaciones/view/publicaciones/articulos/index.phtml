@@ -1,0 +1,69 @@
+<a class="btn btn-primary btn-lg" style="margin: 15px;float: right;" href="<?= $this->url('logout') ?>" >Cerrar Sesión</a>
+
+<br><br>
+<h1>Listado de Artículos</h1>
+<br><br>
+<a style="float: right;" class="btn btn-success btn-lg" href="<?= $this->url('addarticulo') ?>" >Crear Artículo</a>
+<br><br>
+
+<div class="table-responsive">
+	<table style="margin-top: 20px;" class="table table-bordered table-sm">
+		<thead>
+				
+			<tr>
+				<th>#</th>
+				<th>propietario</th>
+				<th>Contenido</th>
+				<th>Foto</th>
+				<th>Fecha Alta</th>
+				<th>Acciones</th>
+			</tr>
+
+		</thead>
+
+		<tbody>
+			<?php foreach ($this->articulos as $articulo) { ?>
+				<tr>
+					<td><?= $articulo->getId(); ?></td>
+					<td><?= $articulo->getEmail(); ?></td>
+					<td><?= $articulo->getArticulo(); ?></td>
+					<td> <img src="/imagen?id=<?= $articulo->getId() ?>" width="600" height="300" > </td>
+					<td><?= $articulo->getFechaAlta(); ?></td>
+					<td>
+						<a class="btn btn-primary" style="margin: 10px;" href="<?= $this->url('updatearticulo') ?>?id=<?= $articulo->getId() ?>" >Actualizar</a><br>
+						<button type="button" style="margin: 10px;" class="btn btn-primary" onclick="openModal(<?= $articulo->getId()?>)">
+						  Eliminar
+						</button>
+					</td>
+				</tr>
+
+			<?php } ?>
+		</tbody>
+		
+	</table>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">¿ Está seguro de eliminar el artículo ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <div id="botonEliminar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	
+	function openModal(id_articulo){
+		var url = "<?= $this->url('deletearticulo') ?>"+"?id="+id_articulo;
+		$("#botonEliminar").html('<a class="btn btn-primary" href="'+url+'" >Si, eliminar</a>');
+		$('#exampleModal').modal('show')
+	}
+</script>

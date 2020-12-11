@@ -1,0 +1,67 @@
+<?php
+
+$title = $this->translate('Artículos');
+# meta keywords
+$this->headMeta()->appendName('keywords', 'Sign Up, Create, Join, New Account');
+# meta description
+$this->headMeta()->appendName('description', 'Actualizar Artículo');
+# page title
+$this->headTitle($this->escapeHtml($title));
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('updatearticulo')."?id=".$id_articulo);
+$form->prepare();
+
+?>
+
+<div class="container">
+	<a class="btn btn-primary btn-lg" style="margin: 15px;float: right;" href="<?= $this->url('logout') ?>" >Cerrar Sesión</a>
+
+	<div class="row">
+		
+		<div class="col-md-5 shadow-sm">
+			<h3 class="mb-3 pt-2 text-md-center">
+				<?= $this->escapeHtml($this->translate('Actualizar Artículo')); ?>
+			</h3>
+
+			<?= $this->form()->openTag($form); ?>
+
+
+            <!-- add the username input field -->
+			<div class="mb-3">
+                <?= $this->formLabel($form->get('articulo')); ?>
+				<div class="form-group">
+                   <?= $this->formTextarea($form->get('articulo')); ?>
+				</div>
+                
+                <div class="text-danger">
+                	<?= $this->formElementErrors($form->get('articulo')); ?>
+                </div>
+			</div>	
+
+			<div class="mb-3">
+				<p style="color: red">Si no desea actualizar la imagen, no seleccione ningun archivo</p>
+				<div class="form-element">
+			        <?php $fileElement = $form->get('image-file'); ?>
+			        <?php echo $this->formLabel($fileElement); ?>
+			        <?php echo $this->formFile($fileElement); ?>
+			        <?php echo $this->formElementErrors($fileElement); ?>
+			    </div>
+			</div>
+
+			<!-- submit and csrf fields -->
+			<div class="mb-3 float-right">
+                <?= $this->formHidden($form->get('csrf')); ?>
+                <div class="text-danger">
+                	<?= $this->formElementErrors($form->get('csrf')); ?>
+                </div>
+				
+                <?= $this->formSubmit($form->get('create_articulo')); ?>           
+			</div>	
+
+			<!-- close the form -->
+			<?= $this->form()->closeTag(); ?>
+
+		</div>
+	</div>
+</div>

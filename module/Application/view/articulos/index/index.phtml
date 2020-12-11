@@ -1,0 +1,17 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<div class="jumbotron">
+    <h1 class="display-4">Publicación de artículos</h1>
+
+    <p>
+       Para poder publicar y comentar articulos es necesario que te registres en el sistema y selecciones el tipo de usuario que tendrás, una vez realizado podrás iniciar sessión y empezar a publicar nuevos artículos o comentar los ya publicados de acuerdo a tu perfil.
+    </p>
+
+    <hr class="my-4">
+
+    <a class="btn btn-primary btn-lg" href="<?= $this->url('signup') ?>" >Registrarse</a>
+    <a class="btn btn-primary btn-lg" href="<?= $this->url('login') ?>" >Iniciar Sesión</a>
+</div>

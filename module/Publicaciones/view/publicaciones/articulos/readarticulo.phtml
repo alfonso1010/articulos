@@ -1,0 +1,108 @@
+<?php
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('readarticulo')."?id=".$id_articulo);
+$form->prepare();
+
+$desabilita_botones = (is_null($opinion_usuario))?"":"disabled";
+?>
+
+<a class="btn btn-primary btn-lg" style="margin: 15px;float: right;" href="<?= $this->url('logout') ?>" >Cerrar Sesión</a>
+
+<br><br>
+<h1>Lectura de Artículo </h1>
+
+
+<div class="table-responsive">
+	<table style="margin-top: 20px;" class="table table-bordered table-sm">
+		<tbody>
+			<tr>
+				<td style="border: 1px solid brown;">
+					<center>
+						<h1 style="color: blue">Artículo <?= $articulo->getId() ?> </h1>
+						<br>
+						<p style="font-size: 30px;"><b>Contenido:</b></p>
+						<p style="font-size: 30px;"><b><?= $articulo->getArticulo(); ?></b></p>
+					 	<img src="/imagen?id=<?= $articulo->getId() ?>" width="600" height="300" > 
+				 	</center>
+				 	<h3 >Publicado por: <b><?= $articulo->getEmail(); ?></b> </h3>
+					<h3 >Fecha de publicación: <b><?= $articulo->getFechaAlta(); ?></b> </h3>
+					<div>
+						<a class="btn btn-danger btn-lg <?= $desabilita_botones ?>" style="margin: 15px;float: right;" href="<?= $this->url('nomegusta') ?>?id=<?= $articulo->getId()  ?>"  >No me gusta</a>
+						<a class="btn btn-success btn-lg <?= $desabilita_botones ?>" style="margin: 15px;float: right;" href="<?= $this->url('megusta') ?>?id=<?= $articulo->getId()  ?>" >Me gusta</a>
+					</div>
+					<div>
+						<br>
+						<p style="color: green">Me gusta: <?= $total_me_gusta ?></p>
+						<p style="color: red">No Me gusta: <?= $total_no_me_gusta ?></p>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+		
+	</table>
+</div>
+<div class="table-responsive">
+	<table style="margin-top: 20px;" class="table table-bordered table-sm">
+		<tbody>
+			<tr>
+				<td style="border: 1px solid brown;">
+					<h3>Agregar Comentario</h3>
+					<?= $this->form()->openTag($form); ?>
+					    <!-- add the username input field -->
+					<div class="mb-3">
+				        <?= $this->formLabel($form->get('comentario')); ?>
+						<div class="form-group">
+				           <?= $this->formTextarea($form->get('comentario')); ?>
+						</div>
+				        
+				        <div class="text-danger">
+				        	<?= $this->formElementErrors($form->get('comentario')); ?>
+				        </div>
+					</div>	
+
+					<!-- submit and csrf fields -->
+					<div class="mb-3 float-right">
+				        <?= $this->formHidden($form->get('csrf')); ?>
+				        <div class="text-danger">
+				        	<?= $this->formElementErrors($form->get('csrf')); ?>
+				        </div>
+						
+				        <?= $this->formSubmit($form->get('create_comentario')); ?>           
+					</div>	
+
+					<!-- close the form -->
+					<?= $this->form()->closeTag(); ?>
+				</td>
+			</tr>
+		</tbody>
+		
+	</table>
+</div>
+
+<div class="table-responsive">
+	<table style="margin-top: 20px;" class="table table-bordered table-sm">
+		<tbody>
+			<tr>
+				<td style="border: 1px solid brown;">
+					<h4 style="color: brown;">Comentarios:</h4>
+				</td>
+			</tr>
+			<?php  foreach ($comentarios as  $comentario) { ?>
+				<tr>
+					<td style="border: 2px solid;">
+						<h5 style="color: blue;">Comentario <?= $comentario->getId(); ?>:</h5>
+						<b><p><?= $comentario->getComentario() ?></p></b>
+					</td>
+				</tr>
+			<?php } ?>
+		</tbody>
+		
+	</table>
+</div>
+<style type="text/css">
+	.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+</style>
