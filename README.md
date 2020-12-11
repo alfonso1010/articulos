@@ -22,6 +22,15 @@ Procedemos a importar la base de datos, el scrpit sql se encuentra en la carpeta
 ```bash
 $ mysql -u <username> -p ecommerce < db/ecommerce.sql
 ```
+Una vez que se tiene la base de datos importada, procedemos a configurar el usuario y password de mysql en el proyecto Lamminas para un correcto CRUD,
+dirigirse al archivo /articulos/config/autoload/development.local.php.dist y renonmbarlo quitando el .dist de tal forma que el archivo tiene que tener 
+el nombre: /articulos/config/autoload/development.local.php, realizado este paso editar el archivo y poner nuestro usuario y password de mysql en las lineas
+```bash
+'db' => [
+    	'username' => 'root',  # change this to match your database's username 
+    	'password' => 'root'       # change this to match your database's password
+    ]
+```
 Posteriormente ejecutar el comando:
 ```bash
 $ composer serve
